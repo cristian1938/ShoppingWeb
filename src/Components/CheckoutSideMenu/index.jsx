@@ -25,6 +25,7 @@ const CheckoutSideMenu = () => {
 
     context.setOrder([...context.order, orderToAdd]) //lo puntos representa o que se tenia antes+ el ordertadd
     context.setCartProducts([])
+    context.setSearchByTitle(null)
   }
 
   return (
