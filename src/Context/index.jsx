@@ -3,7 +3,37 @@ import { createContext } from 'react'
 
 export const ShoppingCartContext = createContext()
 
+export const initializeLocalStorage = () => {
+  const accountInLocalStorage = localStorage.getItem('account')
+  const signOutInLocalStorage = localStorage.getItem('Sign-out')
+
+  let parsedAccount
+  let parsedSignOut
+
+  if (!accountInLocalStorage){
+    localStorage.setItem('account' , JSON.stringify({}))
+    parsedAccount = {}
+  }else{
+    parsedAccount = JSON.parse(accountInLocalStorage)
+  }
+
+  if( !signOutInLocalStorage){
+    localStorage.setItem('SignOut', JSON.stringify(false))
+    parsedSignOut = false
+  } else{
+    parsedSignOut = JSON.stringify(signOutInLocalStorage)
+  }
+
+}
+
 export const ShoppingCartProvider = ({children}) =>{
+
+    //My account
+    
+    const [account, setAccount] = useState({})//SE USARA UN OBJETO VACIO
+
+    //My Sign out
+    const [signOut, setSignOut] = useState(false) //se inicializa en un booleano false
 
     //Shopping cart- Increment quantily
     const[count, setCount] = useState(0)
@@ -103,7 +133,11 @@ export const ShoppingCartProvider = ({children}) =>{
                 searchByTitle,
                 filteredItems,
                 searchByCategory,
-                setSearchByCategory
+                setSearchByCategory,
+                account,
+                setAccount,
+                signOut,
+                setSignOut
                 
             }
         }>
